@@ -1,0 +1,30 @@
+extends layout
+
+block pagescript
+    script.
+        require(["/js/config.js"], function() {
+            require(['bootstrap', 'app/home']);
+        });
+
+block content
+    .container
+        include includes/header
+        .row
+            .col-md-6
+                div.create
+                    h2. Create Game
+                    .form-group
+                        label(for="gameName") Game name:
+                        input.name.form-control(type='text', id="gameName", name='name', value='', placeholder='Game name')
+                    .form-group
+                        label(for="gameNumOfDrinks") Number of drinks:
+                        input.drinks.form-control(type='text', id="gameNumOfDrinks", name='drinks', placeholder='60')
+                    button.submit.btn.btn-default.btn-lg Create game
+            .col-md-6
+                div
+                    h2. List of Games
+                    .list-group.game-list
+                        each game in games
+                            a.list-group-item.game-display(href="/game/#{game.id}")
+                                p.game-title #{game.name}
+                                p Started at #{game.start}, #{game.drinks} drinks

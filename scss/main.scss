@@ -1,0 +1,66 @@
+@import "compass/css3";
+
+.headerTitle {
+    padding: 12px;
+}
+
+.game-list {
+    @include border-radius(4px, 4px);
+    height: 50em;
+    overflow-y: scroll;
+    border: solid 1px lightgray;
+}
+
+.game-display p.game-title {
+    font-size: 2em;
+    font-weight: bolder;
+}
+
+.game .ctrl-buttons {
+    margin-left: 3.5em;
+}
+
+.game button.ctrl-button {
+    margin-right: 1em;
+}
+
+.game .drink-display-container {
+    text-align: center;
+}
+
+.game .drink-display {
+    font-size: 6em;
+    padding: 0em;
+    margin: 0em;
+}
+
+.game .timer {
+    margin: -.25em;
+    text-align: center;
+    font-size: 30em;
+    font-weight: normal;
+}
+
+.game .button {
+    text-align: center;
+    font-size: 4em;
+    font-weight: bolder;
+
+    width: 4em;
+
+    float: left;
+}
+
+.game .button.pause {
+    background: #bdc3c7;
+    color: #ecf0f1;
+}
+
+.game .button.end {
+    background: #c0392b;
+    color: #e74c3c;
+}
+
+.hidden {
+    display: none;
+}

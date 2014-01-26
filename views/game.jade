@@ -1,0 +1,33 @@
+extends layout
+
+block pagescript
+    script.
+        require(['/js/config.js'], function() {
+            require(['bootstrap', 'app/game'])
+        });
+
+block content
+    div.hidden.starttime #{game.start}
+    div.hidden.gameid #{game.id}
+    .container
+        include includes/header
+        .game
+            .row
+                .col-md-12
+                    .drink-display-container
+                        span.drink-display Drink
+                        span.drink-display.counter 1
+            .row
+                .col-md-12
+                    .timer-container
+                        .timer 0
+            .row
+                .col-md-12
+                    .ctrl-buttons-container
+                        .row
+                            .col-md-6.col-md-offset-3
+                                .ctrl-buttons
+                                    div.button.pause
+                                        span.pause PAUSE
+                                    div.button.end
+                                        span.end END

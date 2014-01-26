@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "game.js",
+  "sourceRoot": "../../../coffee/app/",
+  "sources": [
+    "game.coffee"
+  ],
+  "names": [],
+  "mappings": "AAAA;CAAA,CAAA,CACI,IADJ,CAAQ,CACH,CADG,IAAA;CAEA,EAAkB,EAAlB,GAAA,CAAkB,EAAlB;CACI,GAAA,MAAA;CAAA,EAAW,CAAX,EAAA,EAAW;CACN,GAAD,EAAJ,OAAA;CAFJ,IAAkB;CAF1B,EACI;CADJ"
+}
