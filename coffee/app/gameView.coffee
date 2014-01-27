@@ -38,7 +38,7 @@ define([
             @gameStart = $('.gamedata').data('start')
             @gameDrinks = $('.gamedata').data('drinks')
 
-            @pauseResumeButton = $('button.ctrl-button.pause')
+            @pauseResumeButton = $('.ctrl-buttons .button.pause')
             @silentAlert = $('.silent-alert')
 
             @initializeGame()
@@ -60,10 +60,10 @@ define([
             if @ticker
                 clearTimeout(@ticker)
                 @ticker = undefined
-                @pauseResumeButton.text('Resume')
+                @pauseResumeButton.find('span').text('RESUME')
             else
                 @ticker = setTimeout(_.bind(@tick, this), 250)
-                @pauseResumeButton.text('Pause')
+                @pauseResumeButton.find('span').text('PAUSE')
 
         countDirectionChanged:(e) ->
             directionId = $(e.target).find(':selected').val()

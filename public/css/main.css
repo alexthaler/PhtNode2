@@ -45,7 +45,7 @@
 
 /* line 40, ../../scss/main.scss */
 .game .ctrl-buttons {
-  margin-left: 35em;
+  margin-left: 32em;
 }
 
 /* line 44, ../../scss/main.scss */
@@ -78,7 +78,7 @@
   text-align: center;
   font-size: 4em;
   font-weight: bolder;
-  width: 4em;
+  width: 5em;
   float: left;
 }
 

@@ -22,7 +22,7 @@
         this.gameId = $('.gamedata').data('id');
         this.gameStart = $('.gamedata').data('start');
         this.gameDrinks = $('.gamedata').data('drinks');
-        this.pauseResumeButton = $('button.ctrl-button.pause');
+        this.pauseResumeButton = $('.ctrl-buttons .button.pause');
         this.silentAlert = $('.silent-alert');
         this.initializeGame();
         this.initAlertSound('good');
@@ -43,10 +43,10 @@
         if (this.ticker) {
           clearTimeout(this.ticker);
           this.ticker = void 0;
-          return this.pauseResumeButton.text('Resume');
+          return this.pauseResumeButton.find('span').text('RESUME');
         } else {
           this.ticker = setTimeout(_.bind(this.tick, this), 250);
-          return this.pauseResumeButton.text('Pause');
+          return this.pauseResumeButton.find('span').text('PAUSE');
         }
       },
       countDirectionChanged: function(e) {
