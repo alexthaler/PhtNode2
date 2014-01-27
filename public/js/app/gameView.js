@@ -46,8 +46,10 @@
         if (this.ticker) {
           clearTimeout(this.ticker);
           this.ticker = void 0;
-          return this.pauseResumeButton.text('RESUME');
+          this.pauseResumeButton.text('RESUME');
+          return this.pauseStartMoment = moment();
         } else {
+          this.startMoment.add('ms', moment().diff(this.pauseStartMoment));
           this.ticker = setTimeout(_.bind(this.tick, this), 250);
           return this.pauseResumeButton.text('PAUSE');
         }

@@ -63,7 +63,10 @@ define([
                 clearTimeout(@ticker)
                 @ticker = undefined
                 @pauseResumeButton.text('RESUME')
+                @pauseStartMoment = moment()
+
             else
+                @startMoment.add('ms', moment().diff(@pauseStartMoment))
                 @ticker = setTimeout(_.bind(@tick, this), 250)
                 @pauseResumeButton.text('PAUSE')
 
