@@ -12,7 +12,7 @@
       gameId: "",
       gameDrinks: "",
       currDrink: "",
-      countDown: false,
+      countDown: true,
       silent: false,
       startMoment: {},
       ticker: void 0,

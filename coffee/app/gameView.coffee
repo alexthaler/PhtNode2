@@ -24,7 +24,7 @@ define([
         currDrink: ""
 
         # Options
-        countDown: false
+        countDown: true
         silent: false
 
         startMoment: {}
