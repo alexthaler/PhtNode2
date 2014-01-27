@@ -1,5 +1,10 @@
 @import "compass/css3";
 
+.col-centered {
+    float: none;
+    margin: 0 auto;
+}
+
 .headerTitle {
     padding: 12px;
 }
@@ -17,7 +22,7 @@
 }
 
 .game .ctrl-buttons {
-    margin-left: 3.5em;
+    // margin-left: 3.5em;
 }
 
 .game button.ctrl-button {

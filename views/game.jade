@@ -7,8 +7,7 @@ block pagescript
         });
 
 block content
-    div.hidden.starttime #{game.start}
-    div.hidden.gameid #{game.id}
+    div.hidden.gamedata(data-start="#{game.start}", data-id="#{game.id}", data-drinks="#{game.drinks}")
     .container
         include includes/header
         .game
@@ -16,18 +15,33 @@ block content
                 .col-md-12
                     .drink-display-container
                         span.drink-display Drink
-                        span.drink-display.counter 1
+                        span.drink-display.counter
             .row
                 .col-md-12
                     .timer-container
-                        .timer 0
+                        .timer
             .row
-                .col-md-12
+                .col-md-11.col-centered
+                    br
                     .ctrl-buttons-container
                         .row
-                            .col-md-6.col-md-offset-3
-                                .ctrl-buttons
-                                    div.button.pause
-                                        span.pause PAUSE
-                                    div.button.end
-                                        span.end END
+                            .ctrl-buttons
+                                div.button.pause
+                                    span.pause PAUSE
+                                div.button.end
+                                    span.end END
+            .row
+                .col-md-11
+                    br
+                    .options-container
+                        select#countDirectionSelect.selectpicker
+                            option(value="up") Up
+                            option(value="down") Down
+                        select#alertSelect.selectpicker
+                            option(value="good") Good
+                            option(value="fake") Fake
+                    br
+                    br
+                    br
+
+

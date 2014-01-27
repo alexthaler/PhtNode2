@@ -1,9 +1,15 @@
 /* line 3, ../../scss/main.scss */
+.col-centered {
+  float: none;
+  margin: 0 auto;
+}
+
+/* line 8, ../../scss/main.scss */
 .headerTitle {
   padding: 12px;
 }
 
-/* line 7, ../../scss/main.scss */
+/* line 12, ../../scss/main.scss */
 .game-list {
   -webkit-border-radius: 4px 4px;
   -moz-border-radius: 4px / 4px;
@@ -13,35 +19,30 @@
   border: solid 1px lightgray;
 }
 
-/* line 14, ../../scss/main.scss */
+/* line 19, ../../scss/main.scss */
 .game-display p.game-title {
   font-size: 2em;
   font-weight: bolder;
 }
 
-/* line 19, ../../scss/main.scss */
-.game .ctrl-buttons {
-  margin-left: 3.5em;
-}
-
-/* line 23, ../../scss/main.scss */
+/* line 28, ../../scss/main.scss */
 .game button.ctrl-button {
   margin-right: 1em;
 }
 
-/* line 27, ../../scss/main.scss */
+/* line 32, ../../scss/main.scss */
 .game .drink-display-container {
   text-align: center;
 }
 
-/* line 31, ../../scss/main.scss */
+/* line 36, ../../scss/main.scss */
 .game .drink-display {
   font-size: 6em;
   padding: 0em;
   margin: 0em;
 }
 
-/* line 37, ../../scss/main.scss */
+/* line 42, ../../scss/main.scss */
 .game .timer {
   margin: -.25em;
   text-align: center;
@@ -49,7 +50,7 @@
   font-weight: normal;
 }
 
-/* line 44, ../../scss/main.scss */
+/* line 49, ../../scss/main.scss */
 .game .button {
   text-align: center;
   font-size: 4em;
@@ -58,19 +59,19 @@
   float: left;
 }
 
-/* line 54, ../../scss/main.scss */
+/* line 59, ../../scss/main.scss */
 .game .button.pause {
   background: #bdc3c7;
   color: #ecf0f1;
 }
 
-/* line 59, ../../scss/main.scss */
+/* line 64, ../../scss/main.scss */
 .game .button.end {
   background: #c0392b;
   color: #e74c3c;
 }
 
-/* line 64, ../../scss/main.scss */
+/* line 69, ../../scss/main.scss */
 .hidden {
   display: none;
 }

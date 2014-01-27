@@ -2,8 +2,10 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'moment'
-], ($, _, Backbone, moment) -> (
+    'moment',
+    'howler',
+    'bootstrapselect'
+], ($, _, Backbone, _moment, _howler, _bootstrapselect) -> (
     gameView = Backbone.View.extend({
 
         el: '.game'
@@ -11,23 +13,45 @@ define([
         events:
             "click .button.pause": "pauseGame"
             "click .button.end": "endGame"
+            "change #countDirectionSelect": "countDirectionChanged"
+            "change #alertSelect": "alertChanged"
+
+        # Game data
+        gameStart: ""
+        gameId: ""
+        gameDrinks: ""
+
+        # Current data
+        currDrink: ""
+
+        # Options
+        countDown: false
+        silent: false
 
         startMoment: {}
         ticker: undefined
         paused: false
 
+        alertSound: {}
+
         render:() ->
-            @.startMoment = moment($('.starttime').text())
-            @.startGame()
+            @gameId = $('.gamedata').data('id')
+            @gameStart = $('.gamedata').data('start')
+            @gameDrinks = $('.gamedata').data('drinks')
 
-            @gameId = $('.hidden.gameid').text()
             @pauseResumeButton = $('button.ctrl-button.pause')
+            @alertSound = new Howl(
+                urls: ['/audio/goodDrink.wav']
+            )
 
-        startGame:(e) ->
-            unless @ticker
-                @ticker = setTimeout(_.bind(@.tickGameDisplay, this), 250)
-            else
-                console.log 'game already started'
+            @initializeGame()
+            $('.selectpicker').selectpicker();
+
+        initializeGame: () ->
+            @startMoment = moment(@gameStart)
+            @currDrink = @calcDrink()
+            @updateGame(@calcSec(), @currDrink)
+            @tcker = setTimeout(_.bind(@tick, this), 250)
 
         endGame:(e) ->
             clearTimeout(@.ticker)
@@ -41,22 +65,55 @@ define([
 
         pauseGame:(e) ->
             if @ticker
-                clearTimeout(@.ticker)
+                clearTimeout(@ticker)
                 @ticker = undefined
                 @pauseResumeButton.text('Resume')
             else
-                @ticker = setTimeout(_.bind(@.tickGameDisplay, this), 250)
+                @ticker = setTimeout(_.bind(@tick, this), 250)
                 @pauseResumeButton.text('Pause')
 
-        tickGameDisplay: () ->
+        countDirectionChanged:(e) ->
+            directionId = $(e.target).find(':selected').val()
+            @countDown = directionId == "down"
+
+        alertChanged:(e) ->
+            console.log('alert changed')
+            console.log(e)
+
+        tick: () ->
+            sec = @calcSec()
+            drink = @calcDrink()
+
+            @updateGame(sec, drink)
+            @ticker = setTimeout(_.bind(@tick, this), 250)
+
+        updateGame: (sec, drink) ->
+            if drink != @currDrink
+                @currDrink = drink
+                @triggerDrinkAlert()
+
+            $('.drink-display.counter').text(" " + drink)
+            $('.timer').text(@makeSecDisplay(sec))
+
+        triggerDrinkAlert: () ->
+            unless @silent
+                @alertSound.play()
+            else
+                console.log('drink!')
+
+        makeSecDisplay: (sec) ->
+            unless @countDown
+                return sec + 1
+            else
+                return 59 - sec
+
+        calcDrink: () ->
             secDiff = moment().diff(@startMoment, 'seconds')
-            displaySec = (secDiff % 60) + 1
+            return Math.floor((secDiff+1)/60)
 
-            minDiff = Math.floor(secDiff/60)
-            $('.drink-display.counter').text(" " + minDiff)
-
-            $('.timer').text(displaySec)
-            @.ticker = setTimeout(_.bind(@.tickGameDisplay, this), 250)
+        calcSec: () ->
+            secDiff = moment().diff(@startMoment, 'seconds')
+            return (secDiff % 60)
 
     });
 
