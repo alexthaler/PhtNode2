@@ -46,10 +46,10 @@
         if (this.ticker) {
           clearTimeout(this.ticker);
           this.ticker = void 0;
-          return this.pauseResumeButton.find('span').text('RESUME');
+          return this.pauseResumeButton.text('RESUME');
         } else {
           this.ticker = setTimeout(_.bind(this.tick, this), 250);
-          return this.pauseResumeButton.find('span').text('PAUSE');
+          return this.pauseResumeButton.text('PAUSE');
         }
       },
       countDirectionChanged: function(e) {

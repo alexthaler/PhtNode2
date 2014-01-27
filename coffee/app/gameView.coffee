@@ -62,10 +62,10 @@ define([
             if @ticker
                 clearTimeout(@ticker)
                 @ticker = undefined
-                @pauseResumeButton.find('span').text('RESUME')
+                @pauseResumeButton.text('RESUME')
             else
                 @ticker = setTimeout(_.bind(@tick, this), 250)
-                @pauseResumeButton.find('span').text('PAUSE')
+                @pauseResumeButton.text('PAUSE')
 
         countDirectionChanged:(e) ->
             directionId = $(e.target).find(':selected').val()
