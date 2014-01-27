@@ -40,11 +40,9 @@ define([
             @gameDrinks = $('.gamedata').data('drinks')
 
             @pauseResumeButton = $('button.ctrl-button.pause')
-            @alertSound = new Howl(
-                urls: ['/audio/goodDrink.wav']
-            )
 
             @initializeGame()
+            @initAlertSound('good')
             $('.selectpicker').selectpicker();
 
         initializeGame: () ->
@@ -52,6 +50,11 @@ define([
             @currDrink = @calcDrink()
             @updateGame(@calcSec(), @currDrink)
             @tcker = setTimeout(_.bind(@tick, this), 250)
+
+        initAlertSound:(sound) ->
+            @alertSound = new Howl(
+                urls: ['/audio/' + sound + '.wav']
+            )
 
         endGame:(e) ->
             clearTimeout(@.ticker)
@@ -77,8 +80,12 @@ define([
             @countDown = directionId == "down"
 
         alertChanged:(e) ->
-            console.log('alert changed')
-            console.log(e)
+            alertId = $(e.target).find(':selected').val()
+            unless alertId == "silent"
+                @silent = false
+                @initAlertSound(alertId)
+            else
+                @silent = true
 
         tick: () ->
             sec = @calcSec()

@@ -24,10 +24,8 @@
         this.gameStart = $('.gamedata').data('start');
         this.gameDrinks = $('.gamedata').data('drinks');
         this.pauseResumeButton = $('button.ctrl-button.pause');
-        this.alertSound = new Howl({
-          urls: ['/audio/goodDrink.wav']
-        });
         this.initializeGame();
+        this.initAlertSound('good');
         return $('.selectpicker').selectpicker();
       },
       initializeGame: function() {
@@ -35,6 +33,11 @@
         this.currDrink = this.calcDrink();
         this.updateGame(this.calcSec(), this.currDrink);
         return this.tcker = setTimeout(_.bind(this.tick, this), 250);
+      },
+      initAlertSound: function(sound) {
+        return this.alertSound = new Howl({
+          urls: ['/audio/' + sound + '.wav']
+        });
       },
       endGame: function(e) {
         clearTimeout(this.ticker);
@@ -63,8 +66,14 @@
         return this.countDown = directionId === "down";
       },
       alertChanged: function(e) {
-        console.log('alert changed');
-        return console.log(e);
+        var alertId;
+        alertId = $(e.target).find(':selected').val();
+        if (alertId !== "silent") {
+          this.silent = false;
+          return this.initAlertSound(alertId);
+        } else {
+          return this.silent = true;
+        }
       },
       tick: function() {
         var drink, sec;
