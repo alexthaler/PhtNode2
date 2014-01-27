@@ -5,7 +5,6 @@
       el: '.game',
       events: {
         "click .button.pause": "pauseGame",
-        "click .button.end": "endGame",
         "change #countDirectionSelect": "countDirectionChanged",
         "change #alertSelect": "alertChanged"
       },
@@ -38,17 +37,6 @@
       initAlertSound: function(sound) {
         return this.alertSound = new Howl({
           urls: ['/audio/' + sound + '.wav']
-        });
-      },
-      endGame: function(e) {
-        clearTimeout(this.ticker);
-        return $.ajax({
-          type: "DELETE",
-          url: '/api/v1/game/' + this.gameId,
-          dataType: 'text',
-          success: function(data) {
-            return window.location = window.location.origin;
-          }
         });
       },
       pauseGame: function(e) {

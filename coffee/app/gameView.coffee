@@ -12,7 +12,6 @@ define([
 
         events:
             "click .button.pause": "pauseGame"
-            "click .button.end": "endGame"
             "change #countDirectionSelect": "countDirectionChanged"
             "change #alertSelect": "alertChanged"
 
@@ -55,16 +54,6 @@ define([
         initAlertSound:(sound) ->
             @alertSound = new Howl(
                 urls: ['/audio/' + sound + '.wav']
-            )
-
-        endGame:(e) ->
-            clearTimeout(@.ticker)
-            $.ajax(
-                type: "DELETE"
-                url: '/api/v1/game/' + @gameId
-                dataType: 'text'
-                success: (data) ->
-                    window.location = window.location.origin
             )
 
         pauseGame:(e) ->

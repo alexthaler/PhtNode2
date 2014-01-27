@@ -16,7 +16,7 @@
   width: 100%;
   height: 200%;
   z-index: 1000;
-  padding-top: 10em;
+  padding-top: 12em;
   display: none;
 }
 
@@ -45,7 +45,7 @@
 
 /* line 40, ../../scss/main.scss */
 .game .ctrl-buttons {
-  margin-left: 25em;
+  margin-left: 35em;
 }
 
 /* line 44, ../../scss/main.scss */
@@ -103,25 +103,26 @@
 .option-container {
   float: left;
   margin-left: 5em;
+  margin-top: 2em;
 }
 
-/* line 94, ../../scss/main.scss */
+/* line 95, ../../scss/main.scss */
 .option-container label {
   font-size: 1.5em;
   margin-right: 1em;
 }
 
-/* line 99, ../../scss/main.scss */
+/* line 100, ../../scss/main.scss */
 footer {
   text-align: center;
 }
 
-/* line 103, ../../scss/main.scss */
+/* line 104, ../../scss/main.scss */
 footer span {
   color: grey;
 }
 
-/* line 107, ../../scss/main.scss */
+/* line 108, ../../scss/main.scss */
 .hidden {
   display: none;
 }
