@@ -40,6 +40,7 @@ define([
             @gameDrinks = $('.gamedata').data('drinks')
 
             @pauseResumeButton = $('button.ctrl-button.pause')
+            @silentAlert = $('.silent-alert')
 
             @initializeGame()
             @initAlertSound('good')
@@ -106,7 +107,7 @@ define([
             unless @silent
                 @alertSound.play()
             else
-                console.log('drink!')
+                @silentAlert.fadeIn('slow', _.bind(@fadeOutSilentAlert, this))
 
         makeSecDisplay: (sec) ->
             unless @countDown
@@ -121,6 +122,10 @@ define([
         calcSec: () ->
             secDiff = moment().diff(@startMoment, 'seconds')
             return (secDiff % 60)
+
+        # Effects
+        fadeOutSilentAlert:() ->
+            @silentAlert.fadeOut('slow')
 
     });
 

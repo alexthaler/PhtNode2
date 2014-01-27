@@ -24,6 +24,7 @@
         this.gameStart = $('.gamedata').data('start');
         this.gameDrinks = $('.gamedata').data('drinks');
         this.pauseResumeButton = $('button.ctrl-button.pause');
+        this.silentAlert = $('.silent-alert');
         this.initializeGame();
         this.initAlertSound('good');
         return $('.selectpicker').selectpicker();
@@ -94,7 +95,7 @@
         if (!this.silent) {
           return this.alertSound.play();
         } else {
-          return console.log('drink!');
+          return this.silentAlert.fadeIn('slow', _.bind(this.fadeOutSilentAlert, this));
         }
       },
       makeSecDisplay: function(sec) {
@@ -113,6 +114,9 @@
         var secDiff;
         secDiff = moment().diff(this.startMoment, 'seconds');
         return secDiff % 60;
+      },
+      fadeOutSilentAlert: function() {
+        return this.silentAlert.fadeOut('slow');
       }
     });
     return gameView;

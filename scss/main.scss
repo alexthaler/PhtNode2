@@ -9,6 +9,22 @@
     padding: 12px;
 }
 
+.silent-alert {
+    position: absolute;
+    background: red;
+    width: 100%;
+    height: 200%;
+    z-index: 1000;
+    padding-top: 10em;
+    display: none;
+}
+
+.silent-alert span {
+    color: white;
+    font-size: 25em;
+    margin-left: 1em;
+}
+
 .game-list {
     @include border-radius(4px, 4px);
     height: 50em;
@@ -22,7 +38,7 @@
 }
 
 .game .ctrl-buttons {
-    // margin-left: 3.5em;
+    margin-left: 25em;
 }
 
 .game button.ctrl-button {
@@ -64,6 +80,28 @@
 .game .button.end {
     background: #c0392b;
     color: #e74c3c;
+}
+
+.options-container {
+    margin-left: 5em;
+}
+
+.option-container {
+    float: left;
+    margin-left: 5em;
+}
+
+.option-container label {
+    font-size: 1.5em;
+    margin-right: 1em;
+}
+
+footer {
+    text-align: center;
+}
+
+footer span {
+    color: grey;
 }
 
 .hidden {

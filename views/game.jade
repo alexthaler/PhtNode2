@@ -8,6 +8,8 @@ block pagescript
 
 block content
     div.hidden.gamedata(data-start="#{game.start}", data-id="#{game.id}", data-drinks="#{game.drinks}")
+    .silent-alert
+        span DRINK!
     .container
         include includes/header
         .game
@@ -21,7 +23,7 @@ block content
                     .timer-container
                         .timer
             .row
-                .col-md-11.col-centered
+                .col-md-12
                     br
                     .ctrl-buttons-container
                         .row
@@ -31,18 +33,25 @@ block content
                                 div.button.end
                                     span.end END
             .row
-                .col-md-11
+                .col-md-12
                     br
                     .options-container
-                        select#countDirectionSelect.selectpicker
-                            option(value="up") Up
-                            option(value="down") Down
-                        select#alertSelect.selectpicker
-                            option(value="good") Good
-                            option(value="dumb") Dumb
-                            option(value="silent") Silent
+                        .option-container
+                            label Count Direction:
+                            select#countDirectionSelect.selectpicker
+                                option(value="up") Up
+                                option(value="down") Down
+                        .option-container
+                            label Alert:
+                            select#alertSelect.selectpicker
+                                option(value="good") Good
+                                option(value="dumb") Dumb
+                                option(value="silent") Silent
+            .row
+                .col-md-12
                     br
                     br
-                    br
+                    footer
+                        span Created by Alex Thaler, 2014
 
 
