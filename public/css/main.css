@@ -45,27 +45,29 @@
 
 /* line 40, ../../scss/main.scss */
 .game .ctrl-buttons {
-  margin-left: 32em;
+  text-align: center;
 }
 
 /* line 44, ../../scss/main.scss */
-.game button.ctrl-button {
-  margin-right: 1em;
+.game .button {
+  font-size: 4em;
+  font-weight: bolder;
+  padding: .2em .5em;
 }
 
-/* line 48, ../../scss/main.scss */
+/* line 50, ../../scss/main.scss */
 .game .drink-display-container {
   text-align: center;
 }
 
-/* line 52, ../../scss/main.scss */
+/* line 54, ../../scss/main.scss */
 .game .drink-display {
   font-size: 6em;
   padding: 0em;
   margin: 0em;
 }
 
-/* line 58, ../../scss/main.scss */
+/* line 60, ../../scss/main.scss */
 .game .timer {
   margin: -.25em;
   text-align: center;
@@ -73,56 +75,41 @@
   font-weight: normal;
 }
 
-/* line 65, ../../scss/main.scss */
-.game .button {
-  text-align: center;
-  font-size: 4em;
-  font-weight: bolder;
-  width: 5em;
-  float: left;
-}
-
-/* line 75, ../../scss/main.scss */
+/* line 67, ../../scss/main.scss */
 .game .button.pause {
   background: #bdc3c7;
   color: #ecf0f1;
 }
 
-/* line 80, ../../scss/main.scss */
+/* line 72, ../../scss/main.scss */
 .game .button.end {
   background: #c0392b;
   color: #e74c3c;
 }
 
-/* line 85, ../../scss/main.scss */
-.options-container {
-  margin-left: 5em;
-}
-
-/* line 89, ../../scss/main.scss */
+/* line 77, ../../scss/main.scss */
 .option-container {
-  float: left;
   margin-left: 5em;
   margin-top: 2em;
 }
 
-/* line 95, ../../scss/main.scss */
+/* line 82, ../../scss/main.scss */
 .option-container label {
   font-size: 1.5em;
   margin-right: 1em;
 }
 
-/* line 100, ../../scss/main.scss */
+/* line 87, ../../scss/main.scss */
 footer {
   text-align: center;
 }
 
-/* line 104, ../../scss/main.scss */
+/* line 91, ../../scss/main.scss */
 footer span {
   color: grey;
 }
 
-/* line 108, ../../scss/main.scss */
+/* line 95, ../../scss/main.scss */
 .hidden {
   display: none;
 }

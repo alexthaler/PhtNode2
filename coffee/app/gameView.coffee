@@ -42,7 +42,7 @@ define([
             @silentAlert = $('.silent-alert')
 
             @initializeGame()
-            @initAlertSound('good')
+            @initAlertSound('good', false)
             $('.selectpicker').selectpicker();
 
         initializeGame: () ->
@@ -51,10 +51,12 @@ define([
             @updateGame(@calcSec(), @currDrink)
             @tcker = setTimeout(_.bind(@tick, this), 250)
 
-        initAlertSound:(sound) ->
+        initAlertSound:(sound, play) ->
             @alertSound = new Howl(
                 urls: ['/audio/' + sound + '.wav']
             )
+            if play
+                @alertSound.play()
 
         pauseGame:(e) ->
             if @ticker
@@ -73,7 +75,7 @@ define([
             alertId = $(e.target).find(':selected').val()
             unless alertId == "silent"
                 @silent = false
-                @initAlertSound(alertId)
+                @initAlertSound(alertId, true)
             else
                 @silent = true
 

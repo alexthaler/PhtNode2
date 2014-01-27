@@ -25,7 +25,7 @@
         this.pauseResumeButton = $('.ctrl-buttons .button.pause');
         this.silentAlert = $('.silent-alert');
         this.initializeGame();
-        this.initAlertSound('good');
+        this.initAlertSound('good', false);
         return $('.selectpicker').selectpicker();
       },
       initializeGame: function() {
@@ -34,10 +34,13 @@
         this.updateGame(this.calcSec(), this.currDrink);
         return this.tcker = setTimeout(_.bind(this.tick, this), 250);
       },
-      initAlertSound: function(sound) {
-        return this.alertSound = new Howl({
+      initAlertSound: function(sound, play) {
+        this.alertSound = new Howl({
           urls: ['/audio/' + sound + '.wav']
         });
+        if (play) {
+          return this.alertSound.play();
+        }
       },
       pauseGame: function(e) {
         if (this.ticker) {
@@ -59,7 +62,7 @@
         alertId = $(e.target).find(':selected').val();
         if (alertId !== "silent") {
           this.silent = false;
-          return this.initAlertSound(alertId);
+          return this.initAlertSound(alertId, true);
         } else {
           return this.silent = true;
         }

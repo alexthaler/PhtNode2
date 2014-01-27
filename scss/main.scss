@@ -38,11 +38,13 @@
 }
 
 .game .ctrl-buttons {
-    margin-left: 32em;
+    text-align: center;
 }
 
-.game button.ctrl-button {
-    margin-right: 1em;
+.game .button {
+    font-size: 4em;
+    font-weight: bolder;
+    padding: .2em .5em;
 }
 
 .game .drink-display-container {
@@ -62,16 +64,6 @@
     font-weight: normal;
 }
 
-.game .button {
-    text-align: center;
-    font-size: 4em;
-    font-weight: bolder;
-
-    width: 5em;
-
-    float: left;
-}
-
 .game .button.pause {
     background: #bdc3c7;
     color: #ecf0f1;
@@ -82,12 +74,7 @@
     color: #e74c3c;
 }
 
-.options-container {
-    margin-left: 5em;
-}
-
 .option-container {
-    float: left;
     margin-left: 5em;
     margin-top: 2em;
 }
