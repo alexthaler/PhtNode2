@@ -11,6 +11,8 @@ requirejs.config(
             deps: ['jquery']
         jquerydropdown:
             deps: ['jquery']
+        socketio:
+            exports: 'io'
 
     paths:
         app: '/js/app'
@@ -23,4 +25,5 @@ requirejs.config(
         bootstrapselect: '/js/lib/bootstrap-select.min'
         moment: '/js/lib/moment.min'
         howler: '/js/lib/howler.min'
+        socketio: '../socket.io/socket.io'
 )

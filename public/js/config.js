@@ -16,6 +16,9 @@
       },
       jquerydropdown: {
         deps: ['jquery']
+      },
+      socketio: {
+        exports: 'io'
       }
     },
     paths: {
@@ -28,7 +31,8 @@
       bootstrap: '/js/lib/bootstrap.min',
       bootstrapselect: '/js/lib/bootstrap-select.min',
       moment: '/js/lib/moment.min',
-      howler: '/js/lib/howler.min'
+      howler: '/js/lib/howler.min',
+      socketio: '../socket.io/socket.io'
     }
   });
 

@@ -4,14 +4,15 @@ define([
     'backbone',
     'moment',
     'howler',
-    'bootstrapselect'
-], ($, _, Backbone, _moment, _howler, _bootstrapselect) -> (
+    'bootstrapselect',
+    'socketio'
+], ($, _, Backbone, _moment, _howler, _bootstrapselect, io) -> (
     gameView = Backbone.View.extend({
 
         el: '.game'
 
         events:
-            "click .button.pause": "pauseGame"
+            "click .button.pause": "pauseResumeButtonClicked"
             "change #countDirectionSelect": "countDirectionChanged"
             "change #alertSelect": "alertChanged"
 
@@ -49,7 +50,22 @@ define([
             @startMoment = moment(@gameStart)
             @currDrink = @calcDrink()
             @updateGame(@calcSec(), @currDrink)
+
+            @socket = io.connect('http://localhost:3000')
+            @initSocketHandlers()
+            @socket.emit('join', {id:@gameId})
+
             @tcker = setTimeout(_.bind(@tick, this), 250)
+
+        initSocketHandlers:() ->
+            @socket.on('pause', () =>
+                console.log 'Pause event received'
+                @pauseGame(false)
+            )
+            @socket.on('resume', () =>
+                console.log 'Resume event received'
+                @resumeGame(false)
+            )
 
         initAlertSound:(sound, play) ->
             @alertSound = new Howl(
@@ -58,17 +74,28 @@ define([
             if play
                 @alertSound.play()
 
-        pauseGame:(e) ->
-            if @ticker
+        pauseResumeButtonClicked:(e) ->
+            if !@paused
+                @pauseGame()
+            else
+                @resumeGame()
+
+        pauseGame:(emit=true) ->
+            if !@paused
+                @paused = true
                 clearTimeout(@ticker)
                 @ticker = undefined
                 @pauseResumeButton.text('RESUME')
                 @pauseStartMoment = moment()
+                if emit then @socket.emit('pause', {id:@gameId})
 
-            else
+        resumeGame:(emit=true) ->
+            if @paused
+                @paused = false
                 @startMoment.add('ms', moment().diff(@pauseStartMoment))
                 @ticker = setTimeout(_.bind(@tick, this), 250)
                 @pauseResumeButton.text('PAUSE')
+                if emit then @socket.emit('resume', {id:@gameId})
 
         countDirectionChanged:(e) ->
             directionId = $(e.target).find(':selected').val()

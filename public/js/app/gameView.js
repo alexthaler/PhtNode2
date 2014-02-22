@@ -1,10 +1,10 @@
 (function() {
-  define(['jquery', 'underscore', 'backbone', 'moment', 'howler', 'bootstrapselect'], function($, _, Backbone, _moment, _howler, _bootstrapselect) {
+  define(['jquery', 'underscore', 'backbone', 'moment', 'howler', 'bootstrapselect', 'socketio'], function($, _, Backbone, _moment, _howler, _bootstrapselect, io) {
     var gameView;
     gameView = Backbone.View.extend({
       el: '.game',
       events: {
-        "click .button.pause": "pauseGame",
+        "click .button.pause": "pauseResumeButtonClicked",
         "change #countDirectionSelect": "countDirectionChanged",
         "change #alertSelect": "alertChanged"
       },
@@ -32,7 +32,23 @@
         this.startMoment = moment(this.gameStart);
         this.currDrink = this.calcDrink();
         this.updateGame(this.calcSec(), this.currDrink);
+        this.socket = io.connect('http://localhost:3000');
+        this.initSocketHandlers();
+        this.socket.emit('join', {
+          id: this.gameId
+        });
         return this.tcker = setTimeout(_.bind(this.tick, this), 250);
+      },
+      initSocketHandlers: function() {
+        var _this = this;
+        this.socket.on('pause', function() {
+          console.log('Pause event received');
+          return _this.pauseGame(false);
+        });
+        return this.socket.on('resume', function() {
+          console.log('Resume event received');
+          return _this.resumeGame(false);
+        });
       },
       initAlertSound: function(sound, play) {
         this.alertSound = new Howl({
@@ -42,16 +58,44 @@
           return this.alertSound.play();
         }
       },
-      pauseGame: function(e) {
-        if (this.ticker) {
+      pauseResumeButtonClicked: function(e) {
+        if (!this.paused) {
+          return this.pauseGame();
+        } else {
+          return this.resumeGame();
+        }
+      },
+      pauseGame: function(emit) {
+        if (emit == null) {
+          emit = true;
+        }
+        if (!this.paused) {
+          this.paused = true;
           clearTimeout(this.ticker);
           this.ticker = void 0;
           this.pauseResumeButton.text('RESUME');
-          return this.pauseStartMoment = moment();
-        } else {
+          this.pauseStartMoment = moment();
+          if (emit) {
+            return this.socket.emit('pause', {
+              id: this.gameId
+            });
+          }
+        }
+      },
+      resumeGame: function(emit) {
+        if (emit == null) {
+          emit = true;
+        }
+        if (this.paused) {
+          this.paused = false;
           this.startMoment.add('ms', moment().diff(this.pauseStartMoment));
           this.ticker = setTimeout(_.bind(this.tick, this), 250);
-          return this.pauseResumeButton.text('PAUSE');
+          this.pauseResumeButton.text('PAUSE');
+          if (emit) {
+            return this.socket.emit('resume', {
+              id: this.gameId
+            });
+          }
         }
       },
       countDirectionChanged: function(e) {
